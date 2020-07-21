@@ -1,0 +1,31 @@
+<div class="main">
+    <button class="btn-return" (click)="onBack()"><i class="fas fa-caret-square-left"></i> Retour</button>
+    <div class="form-upload">
+        <form (ngSubmit)="addPost(postsForm.value)" [formGroup]="postsForm">
+            <div class="form-info">
+                Ajouter une photo:
+            </div>
+            <div class="form-group">
+                <label for="title">Titre:</label>
+                <input class="form-control" type="text" id="title" formControlName="title">
+            </div>
+            <div class="form-group">
+                <label for="content">Description:</label>
+                <textarea class="form-control" id="content" formControlName="content"></textarea>
+            </div>
+
+            <div class="form-group">
+                <div class="input-file-container">
+                   
+                    <input class="input-file" type="file" name="cover" id="cover" (change)="handleInput($event)" formControlName="cover" >
+                    <label for="cover" class="input-file-trigger">
+                        <div *ngIf="message != null;else fileName"><i class="fas fa-download"></i> Fichier selectionné: {{message}} </div>
+                        <ng-template #fileName><i class="fas fa-upload"></i> Choisit un fichier</ng-template>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-submit" type="submit" [disabled]="!postsForm.valid"><i class="fas fa-save"></i> Enregistrer</button> 
+        </form>
+    </div>
+</div>

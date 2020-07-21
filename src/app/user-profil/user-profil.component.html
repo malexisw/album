@@ -1,0 +1,104 @@
+<div class="main">
+    <div class="profil">
+        <div class="img" *ngIf="pp">
+            <img class="img-profil" [src]="pp" [(ngModel)]="pp" ngDefaultControl>
+        </div>
+        <div class="img" *ngIf="!pp">
+            <img class="img-profil" src="../../assets/img/placeholderprofil.jpg" width="190px" height="190px" [(ngModel)]="pp" ngDefaultControl>
+        </div>
+        <div class="info" *ngIf=!isEdit>
+            <button class="btn-edit" (click)="editProfil()">
+                <i class="fas fa-pen"></i>
+            </button>
+            <button class="btn-edit" (click)="changeConf()" *ngIf="isConf">
+                <i class="fas fa-lock" ></i> <i class="fas fa-lock-open" *ngIf="!isConf"></i>
+                <span class="private-text">Priver</span>
+            </button>
+            <button class="btn-edit" (click)="changeConf()" *ngIf="!isConf"> 
+                <i class="fas fa-lock-open"></i>
+                <span class="private-text">Public</span>
+            </button>
+            <div class="pseudo">
+                {{ user.pseudo }}
+            </div>
+            <div class="name">
+                <h4> {{ user.firstName }} {{ user.lastName }} </h4>
+            </div>
+            <div class="description">
+                <p class="title">Description :</p>
+                <p class="content">{{ user.description }}</p>
+            </div>
+        </div>
+    
+
+        <div class="info" *ngIf=isEdit>
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm.value)">
+                <button class="btn-edit" type="submit">
+                    <i class="fas fa-save"></i>
+                </button>
+                <button class="btn-edit" (click)="changeConf()" *ngIf="isConf">
+                    <i class="fas fa-lock" ></i> <i class="fas fa-lock-open" *ngIf="!isConf"></i>
+                    <span class="private-text">Profil priver</span>
+                </button>
+                <button class="btn-edit" (click)="changeConf()" *ngIf="!isConf"> 
+                    <i class="fas fa-lock-open"></i>
+                    <span class="private-text">Profil public</span>
+                </button>
+                <div class="pseudo">
+                    {{ user.pseudo }}
+                </div>
+                <div class="name">
+                    <h4> {{ user.firstName }} {{ user.lastName }} </h4>
+                </div>
+                <div class="description">
+                    <label for="description" class="title">Description :</label>
+                    <textarea cols="10" rows="4" id="description" class="form-content" formControlName="description" [(ngModel)]="user.description"></textarea>
+                </div>
+            </form>
+            
+            <form [formGroup]="ppForm" (ngSubmit)="addPP(ppForm.value)">
+                <div class="input-file-container">
+                    <input class="input-file" type="file" name="imgProfil" (change)="handleInput($event)">
+                    <label for="imgProfil" class="input-file-trigger">
+                        <div *ngIf="message != null;else fileName"><i class="fas fa-upload"></i> Fichier selectionné: {{message}} </div>
+                        <ng-template #fileName><i class="fas fa-download"></i> Choisit un fichier</ng-template>
+                    </label>
+                </div>
+                <button type="submit" class="btn-ok">Ok</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="allposts">
+        <div class="posts">
+            <a class="add-img" routerLink="upload">
+                <img class="imgholder" src="../../assets/img/placeholder1.png" height="293" width="293">
+            </a>
+            <ng-container *ngFor="let post of posts; let i of index">
+                <div class="post" *ngIf="post.id != 'profil'">
+                    <button class="btn-delete" (click)="deletePost(post.id, post.data.fileref)"><i class="fas fa-times"></i></button>
+                    <img [src]="post.data.cover" height="293" width="293" (click)="viewImg(i)" style="cursor: pointer;">  
+                </div>
+            </ng-container> 
+        </div>
+    </div>
+
+    <div class="viewImg" *ngIf=isViewImg (click)="isViewImg = !isViewImg" style="cursor: pointer;" >
+        <div class="info-img">
+            <div class="imgposts">
+                <button class="btn-delete-view" (click)="deletePost(img.id, img.data.fileref)" style="z-index: 4;"><i class="fas fa-times"></i></button>
+                <img class="imgpost" [src]="img.data.cover" height="500" width="500">
+            </div>
+            <div class="description-img">
+                <div class="title-img">
+                    {{img.data.title}}
+                </div>
+                <div class="content-img">
+                    <div class="desc">Description:</div> 
+                    <div class="text-desc">{{img.data.content}}</div> 
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+

@@ -1,0 +1,54 @@
+<div class="main">
+    <button class="btn-return" (click)="onBack()"><i class="fas fa-caret-square-left"></i> Retour</button>
+    <div class="profil">
+        <div class="img" *ngIf="pp">
+            <img class="img-profil" [src]="pp">
+        </div>
+
+        <div class="info">
+            <div class="pseudo">
+                {{ user.pseudo }}
+            </div>
+            <div class="name">
+                <h4> {{ user.firstName }} {{ user.lastName }} </h4>
+            </div>
+            <div class="description">
+                <p class="title">Description :</p>
+                <p class="content">{{ user.description }}</p>
+            </div>
+        </div>
+    </div>
+
+        <div class="allposts">
+            <div class="posts">
+                <ng-container *ngFor="let post of posts; let i of index">
+                    <div class="post" *ngIf="post.id != 'profil'">
+                        <i (click)="viewImg(i)" style="cursor: pointer;">
+                            <img [src]="post.data.cover" height="293" width="293" >
+                        </i>   
+                    </div>
+                </ng-container> 
+            </div>
+        </div>
+        
+
+        <div class="viewImg" *ngIf=isViewImg (click)="isViewImg = !isViewImg" style="cursor: pointer;" >
+            <div class="info-img">
+                <div class="imgpost">
+                    <img [src]="img.data.cover" height="500" width="500">
+                </div>
+                <div class="description-img">
+                    <div class="title-img">
+                        {{img.data.title}}
+                    </div>
+                    <div class="content-img">
+                        <div class="desc">Description:</div> 
+                        <div class="text-desc">{{img.data.content}}</div> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+</div>
+
+
+

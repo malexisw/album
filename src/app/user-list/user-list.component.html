@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="list-group">
+        <ng-container *ngFor="let user of users; let i = index;">
+            <button class="list-group-item"
+            *ngIf="!isConf[i]"
+            (click)="onViewUser(i)">
+            <img class="list-group-item-img" [src]="tabpp[i]" height="100px" width="100px"/>
+            <div class="list-group-item-heading">{{ user.pseudo }} </div>
+            <div class="list-group-item-text">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="list-group-item-desc">{{ user.description }}</div>
+            </button>
+        </ng-container>
+    </div>
+</div>
