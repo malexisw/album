@@ -93,14 +93,11 @@ export class UserProfilComponent implements OnInit {
           id: post.payload.doc.id,
           data: post.payload.doc.data()
         })
-        console.log(this.posts)
       })
     })
   }
 
   deletePost(id: string, image: string){
-    console.log(image)
-    console.log(id)
     this.imageService.deletePosts(id, image);
   }
 
