@@ -8,12 +8,12 @@ This project is my first project using Angular. It's an app to share and/or stor
 
 ## Techno
 ```
-AngularJS Javascript HTML5 CSS Sass Typescript
+AngularJS - Javascript - HTML5 - CSS - Sass - Typescript
 
 ```
 
 ## Tools
 ```
-Visual Studio Code Firebase Font Awesome
+Visual Studio Code - Firebase - Font Awesome
 
 ```
